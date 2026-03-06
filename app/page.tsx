@@ -8,44 +8,52 @@ export default function Home() {
     <main className="relative overflow-hidden">
 
       {/* HERO */}
-      <section className="relative min-h-screen flex items-center justify-center">
+<section className="relative min-h-screen flex items-center justify-center">
 
-        <Image
-          src="/images/hero.jpg"
-          alt="Continuum Wellness Sanctuary"
-          fill
-          priority
-          className="object-cover"
-        />
+  <motion.div
+    initial={{ scale: 1.05 }}
+    animate={{ scale: 1 }}
+    transition={{ duration: 2.5, ease: "easeOut" }}
+    className="absolute inset-0"
+  >
+    <Image
+src="/images/hero.jpg?v=2"
+      alt="Continuum Wellness Sanctuary"
+      fill
+      priority
+      className="object-cover"
+    />
+  </motion.div>
 
-        {/* Softer cinematic overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30" />
+  {/* Layered atmospheric overlays */}
+  <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-black/10 to-black/40" />
+  <div className="absolute inset-0 backdrop-blur-[1.5px]" />
 
-        {/* Hero Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: "easeOut" }}
-          className="relative z-10 text-center px-6 max-w-3xl"
-        >
-          <p className="text-sm md:text-base tracking-[0.3em] text-white/70 mb-6">
-            COMING SOON
-          </p>
+  {/* Hero Content */}
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1.4, ease: "easeOut" }}
+    className="relative z-10 text-center px-6 max-w-3xl"
+  >
+    <p className="text-xs md:text-sm tracking-[0.35em] text-white/85 mb-6 font-medium drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]">
+      COMING SOON
+    </p>
 
-          <h1 className="font-serif text-5xl md:text-7xl font-light tracking-wide text-white mb-6 drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
-            Continuum Wellness
-          </h1>
+    <h1 className="font-serif text-5xl md:text-7xl font-light tracking-wide text-white mb-6 drop-shadow-[0_3px_18px_rgba(0,0,0,0.45)]">
+      Continuum Wellness
+    </h1>
 
-          <p className="font-serif italic text-lg md:text-2xl text-white/80 mb-10">
-            by Carol Ann Beasley
-          </p>
+    <p className="font-serif italic text-lg md:text-2xl text-white/90 mb-10 drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
+      by Carol Ann Beasley
+    </p>
 
-          <p className="text-base md:text-lg text-white/75 leading-relaxed font-light max-w-xl mx-auto">
-            A sanctuary for presence, restoration, and meaningful belonging.
-          </p>
-        </motion.div>
+    <p className="text-sm md:text-lg text-white/85 leading-relaxed font-light max-w-xl mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)]">
+      A sanctuary for presence, restoration, and meaningful belonging.
+    </p>
+  </motion.div>
 
-      </section>
+</section>
 
       {/* PHILOSOPHY */}
       <section className="bg-neutral-50 py-32 px-6">
