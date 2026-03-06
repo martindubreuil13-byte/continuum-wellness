@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
@@ -11,18 +11,26 @@ const fadeUp = {
 };
 
 export default function Home() {
+  const { scrollY } = useScroll();
+
+  const heroImageY = useTransform(scrollY, [0, 800], [0, 45]);
+  const heroImageScale = useTransform(scrollY, [0, 800], [1.04, 1.09]);
+  const heroContentY = useTransform(scrollY, [0, 500], [0, -18]);
+  const heroContentOpacity = useTransform(scrollY, [0, 450], [1, 0.92]);
+
   return (
     <main className="relative overflow-x-hidden bg-[#f7f4ef] text-neutral-900">
       {/* HERO */}
       <section className="relative min-h-screen overflow-hidden">
         <motion.div
+          style={{ y: heroImageY, scale: heroImageScale }}
           initial={{ scale: 1.04 }}
           animate={{ scale: 1 }}
           transition={{ duration: 2.4, ease: "easeOut" }}
           className="absolute inset-0"
         >
           <Image
-            src="/images/hero.jpg?v=3"
+            src="/images/hero.jpg?v=4"
             alt="Continuum Wellness Sanctuary"
             fill
             priority
@@ -31,13 +39,15 @@ export default function Home() {
         </motion.div>
 
         {/* layered cinematic overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/45" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_42%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/12 to-black/50" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.14),transparent_42%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.18),transparent_25%)]" />
         <div className="absolute inset-0 backdrop-blur-[1.5px]" />
 
         {/* hero content */}
         <div className="relative z-10 flex min-h-screen items-center justify-center px-5 py-16 sm:px-6">
           <motion.div
+            style={{ y: heroContentY, opacity: heroContentOpacity }}
             initial={{ opacity: 0, y: 34 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
@@ -47,9 +57,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
-              className="mx-auto mb-5 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md"
+              className="mx-auto mb-5 inline-flex rounded-full border border-white/25 bg-white/12 px-4 py-2 shadow-[0_10px_30px_rgba(0,0,0,0.14)] backdrop-blur-md"
             >
-              <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)] sm:text-xs">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.65)] sm:text-xs">
                 Coming Soon
               </p>
             </motion.div>
@@ -58,17 +68,17 @@ export default function Home() {
               initial={{ opacity: 0, y: 26 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.15, delay: 0.2, ease: "easeOut" }}
-              className="font-serif text-5xl font-light leading-[0.95] tracking-[0.02em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.48)] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+              className="font-serif text-5xl font-light leading-[0.95] tracking-[0.02em] text-white drop-shadow-[0_6px_28px_rgba(0,0,0,0.55)] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
             >
               Continuum
-              <span className="block mt-2">Wellness</span>
+              <span className="mt-2 block">Wellness</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.1, delay: 0.35, ease: "easeOut" }}
-              className="mt-5 font-serif text-lg italic text-white/95 drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] sm:text-xl md:text-2xl"
+              className="mt-5 font-serif text-lg italic text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.52)] sm:text-xl md:text-2xl"
             >
               by Carol Ann Beasley
             </motion.p>
@@ -77,9 +87,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.1, delay: 0.48, ease: "easeOut" }}
-              className="mx-auto mt-7 max-w-2xl rounded-[28px] border border-white/15 bg-black/18 px-5 py-4 shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-md sm:px-7 sm:py-5"
+              className="mx-auto mt-7 max-w-2xl rounded-[28px] border border-white/18 bg-black/24 px-5 py-4 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md sm:px-7 sm:py-5"
             >
-              <p className="text-sm font-normal leading-relaxed text-white/95 drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)] sm:text-base md:text-lg">
+              <p className="text-sm font-medium leading-relaxed text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.62)] sm:text-base md:text-lg">
                 A sanctuary for presence, restoration, and meaningful
                 belonging.
               </p>
@@ -93,7 +103,7 @@ export default function Home() {
             >
               <a
                 href="#philosophy"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-xs uppercase tracking-[0.24em] text-white/95 shadow-[0_10px_30px_rgba(0,0,0,0.16)] backdrop-blur-md transition duration-300 hover:bg-white/15"
+                className="inline-flex items-center gap-2 rounded-full border border-white/22 bg-white/12 px-5 py-3 text-xs uppercase tracking-[0.24em] text-white shadow-[0_12px_34px_rgba(0,0,0,0.18)] backdrop-blur-md transition duration-300 hover:bg-white/18"
               >
                 Enter Sanctuary
                 <span aria-hidden="true">↓</span>
@@ -108,10 +118,7 @@ export default function Home() {
         id="philosophy"
         className="relative bg-gradient-to-b from-[#f5f0e8] to-[#fbf8f3] px-6 py-24 sm:py-28"
       >
-        <motion.div
-          {...fadeUp}
-          className="mx-auto max-w-5xl text-center"
-        >
+        <motion.div {...fadeUp} className="mx-auto max-w-5xl text-center">
           <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.3em] text-neutral-500 sm:text-xs">
             The Philosophy
           </p>
@@ -167,7 +174,7 @@ export default function Home() {
                   delay: index * 0.12,
                   ease: "easeOut",
                 }}
-                className="group rounded-[30px] border border-neutral-200/80 bg-[linear-gradient(180deg,#ffffff_0%,#faf7f2_100%)] p-8 shadow-[0_18px_50px_rgba(25,25,25,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(25,25,25,0.08)]"
+                className="group rounded-[30px] border border-white/65 bg-white/58 p-8 shadow-[0_18px_50px_rgba(25,25,25,0.06)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:bg-white/66 hover:shadow-[0_24px_60px_rgba(25,25,25,0.09)]"
               >
                 <div className="mb-6 h-px w-14 bg-neutral-300 transition duration-300 group-hover:w-20" />
                 <h3 className="font-serif text-2xl font-light text-neutral-800">
@@ -188,7 +195,7 @@ export default function Home() {
           {...fadeUp}
           className="mx-auto grid max-w-6xl gap-5 rounded-[34px] border border-white/60 bg-white/70 p-6 shadow-[0_18px_60px_rgba(30,30,30,0.06)] backdrop-blur-xl md:grid-cols-3 md:p-8"
         >
-          <div className="rounded-[24px] bg-white/80 p-6">
+          <div className="rounded-[24px] border border-white/70 bg-white/82 p-6 backdrop-blur-md shadow-[0_10px_30px_rgba(30,30,30,0.04)]">
             <p className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">
               Atmosphere
             </p>
@@ -197,7 +204,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="rounded-[24px] bg-white/80 p-6">
+          <div className="rounded-[24px] border border-white/70 bg-white/82 p-6 backdrop-blur-md shadow-[0_10px_30px_rgba(30,30,30,0.04)]">
             <p className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">
               Intention
             </p>
@@ -206,7 +213,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="rounded-[24px] bg-white/80 p-6">
+          <div className="rounded-[24px] border border-white/70 bg-white/82 p-6 backdrop-blur-md shadow-[0_10px_30px_rgba(30,30,30,0.04)]">
             <p className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">
               Promise
             </p>
