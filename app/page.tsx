@@ -21,97 +21,89 @@ export default function Home() {
   return (
     <main className="relative overflow-x-hidden bg-[#f7f4ef] text-neutral-900">
       {/* HERO */}
-      <section className="relative min-h-screen overflow-hidden">
-        <motion.div
-          style={{ y: heroImageY, scale: heroImageScale }}
-          initial={{ scale: 1.04 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 2.4, ease: "easeOut" }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="/images/hero.jpg?v=4"
-            alt="Continuum Wellness Sanctuary"
-            fill
-            priority
-            className="object-cover object-center"
+<section className="relative min-h-screen overflow-hidden">
+
+  {/* Background Image — stable, no jitter */}
+  <motion.div
+    initial={{ scale: 1.05 }}
+    animate={{ scale: 1 }}
+    transition={{ duration: 2.2, ease: "easeOut" }}
+    className="absolute inset-0"
+  >
+    <Image
+      src="/images/hero.jpg?v=5"
+      alt="Continuum Wellness Sanctuary"
+      fill
+      priority
+      className="object-cover object-center"
+    />
+  </motion.div>
+
+  {/* Atmospheric layers */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-black/55" />
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.16),transparent_45%)]" />
+
+  {/* Content */}
+  <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
+    <motion.div
+      initial={{ opacity: 0, y: 34 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.3, ease: "easeOut" }}
+      className="w-full max-w-4xl text-center"
+    >
+      {/* Coming Soon */}
+      <div className="mx-auto mb-6 inline-flex rounded-full border border-white/30 bg-white/15 px-5 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.65)]">
+          Coming Soon
+        </p>
+      </div>
+
+      {/* Title */}
+      <h1 className="font-serif text-5xl font-light leading-[0.95] tracking-[0.02em] text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.55)] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+        Continuum
+        <span className="mt-2 block">Wellness</span>
+      </h1>
+
+      {/* Signature */}
+      <p className="mt-6 font-serif text-lg italic text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)] sm:text-xl md:text-2xl">
+        by Carol Ann Beasley
+      </p>
+
+      {/* Invitation Panel */}
+      <motion.div
+        initial={{ opacity: 0, y: 26 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, delay: 0.4 }}
+        className="mx-auto mt-10 max-w-xl rounded-[32px] border border-white/30 bg-white/12 p-8 shadow-[0_25px_60px_rgba(0,0,0,0.25)] backdrop-blur-2xl"
+      >
+        <p className="text-xs uppercase tracking-[0.28em] text-white/85 mb-4">
+          Founding Circle Invitation
+        </p>
+
+        <p className="text-white text-base leading-relaxed font-light mb-6">
+          A limited number of founding members and early partners will be
+          invited to shape the future of this sanctuary.
+        </p>
+
+        {/* Email Form */}
+        <form className="flex flex-col gap-4">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="rounded-full bg-white/90 px-6 py-3 text-neutral-800 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-white/60"
           />
-        </motion.div>
-
-        {/* layered cinematic overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/12 to-black/50" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.14),transparent_42%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.18),transparent_25%)]" />
-        <div className="absolute inset-0 backdrop-blur-[1.5px]" />
-
-        {/* hero content */}
-        <div className="relative z-10 flex min-h-screen items-center justify-center px-5 py-16 sm:px-6">
-          <motion.div
-            style={{ y: heroContentY, opacity: heroContentOpacity }}
-            initial={{ opacity: 0, y: 34 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="w-full max-w-4xl text-center"
+          <button
+            type="submit"
+            className="rounded-full bg-neutral-900 px-6 py-3 text-sm uppercase tracking-[0.24em] text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition duration-300 hover:bg-neutral-800"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
-              className="mx-auto mb-5 inline-flex rounded-full border border-white/25 bg-white/12 px-4 py-2 shadow-[0_10px_30px_rgba(0,0,0,0.14)] backdrop-blur-md"
-            >
-              <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.65)] sm:text-xs">
-                Coming Soon
-              </p>
-            </motion.div>
+            Request Private Invitation
+          </button>
+        </form>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 26 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.15, delay: 0.2, ease: "easeOut" }}
-              className="font-serif text-5xl font-light leading-[0.95] tracking-[0.02em] text-white drop-shadow-[0_6px_28px_rgba(0,0,0,0.55)] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
-            >
-              Continuum
-              <span className="mt-2 block">Wellness</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, delay: 0.35, ease: "easeOut" }}
-              className="mt-5 font-serif text-lg italic text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.52)] sm:text-xl md:text-2xl"
-            >
-              by Carol Ann Beasley
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, delay: 0.48, ease: "easeOut" }}
-              className="mx-auto mt-7 max-w-2xl rounded-[28px] border border-white/18 bg-black/24 px-5 py-4 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md sm:px-7 sm:py-5"
-            >
-              <p className="text-sm font-medium leading-relaxed text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.62)] sm:text-base md:text-lg">
-                A sanctuary for presence, restoration, and meaningful
-                belonging.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.62, ease: "easeOut" }}
-              className="mt-8 flex items-center justify-center"
-            >
-              <a
-                href="#philosophy"
-                className="inline-flex items-center gap-2 rounded-full border border-white/22 bg-white/12 px-5 py-3 text-xs uppercase tracking-[0.24em] text-white shadow-[0_12px_34px_rgba(0,0,0,0.18)] backdrop-blur-md transition duration-300 hover:bg-white/18"
-              >
-                Enter Sanctuary
-                <span aria-hidden="true">↓</span>
-              </a>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* PHILOSOPHY */}
       <section
