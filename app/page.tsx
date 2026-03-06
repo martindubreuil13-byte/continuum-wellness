@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
@@ -11,99 +11,106 @@ const fadeUp = {
 };
 
 export default function Home() {
-  const { scrollY } = useScroll();
-
-  const heroImageY = useTransform(scrollY, [0, 800], [0, 45]);
-  const heroImageScale = useTransform(scrollY, [0, 800], [1.04, 1.09]);
-  const heroContentY = useTransform(scrollY, [0, 500], [0, -18]);
-  const heroContentOpacity = useTransform(scrollY, [0, 450], [1, 0.92]);
-
   return (
     <main className="relative overflow-x-hidden bg-[#f7f4ef] text-neutral-900">
       {/* HERO */}
-<section className="relative min-h-screen overflow-hidden">
-
-  {/* Background Image — stable, no jitter */}
-  <motion.div
-    initial={{ scale: 1.05 }}
-    animate={{ scale: 1 }}
-    transition={{ duration: 2.2, ease: "easeOut" }}
-    className="absolute inset-0"
-  >
-    <Image
-      src="/images/hero.jpg?v=5"
-      alt="Continuum Wellness Sanctuary"
-      fill
-      priority
-      className="object-cover object-center"
-    />
-  </motion.div>
-
-  {/* Atmospheric layers */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-black/55" />
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.16),transparent_45%)]" />
-
-  {/* Content */}
-  <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
-    <motion.div
-      initial={{ opacity: 0, y: 34 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.3, ease: "easeOut" }}
-      className="w-full max-w-4xl text-center"
-    >
-      {/* Coming Soon */}
-      <div className="mx-auto mb-6 inline-flex rounded-full border border-white/30 bg-white/15 px-5 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.18)] backdrop-blur-xl">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.65)]">
-          Coming Soon
-        </p>
-      </div>
-
-      {/* Title */}
-      <h1 className="font-serif text-5xl font-light leading-[0.95] tracking-[0.02em] text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.55)] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
-        Continuum
-        <span className="mt-2 block">Wellness</span>
-      </h1>
-
-      {/* Signature */}
-      <p className="mt-6 font-serif text-lg italic text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)] sm:text-xl md:text-2xl">
-        by Carol Ann Beasley
-      </p>
-
-      {/* Invitation Panel */}
-      <motion.div
-        initial={{ opacity: 0, y: 26 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, delay: 0.4 }}
-        className="mx-auto mt-10 max-w-xl rounded-[32px] border border-white/30 bg-white/12 p-8 shadow-[0_25px_60px_rgba(0,0,0,0.25)] backdrop-blur-2xl"
-      >
-        <p className="text-xs uppercase tracking-[0.28em] text-white/85 mb-4">
-          Founding Circle Invitation
-        </p>
-
-        <p className="text-white text-base leading-relaxed font-light mb-6">
-          A limited number of founding members and early partners will be
-          invited to shape the future of this sanctuary.
-        </p>
-
-        {/* Email Form */}
-        <form className="flex flex-col gap-4">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="rounded-full bg-white/90 px-6 py-3 text-neutral-800 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-white/60"
+      <section className="relative min-h-screen overflow-hidden">
+        {/* Background Image — stable, no jitter */}
+        <motion.div
+          initial={{ scale: 1.05 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2.2, ease: "easeOut" }}
+          className="absolute inset-0"
+        >
+          <Image
+            src="/images/hero.jpg?v=7"
+            alt="Continuum Wellness Sanctuary"
+            fill
+            priority
+            className="object-cover object-center"
           />
-          <button
-            type="submit"
-            className="rounded-full bg-neutral-900 px-6 py-3 text-sm uppercase tracking-[0.24em] text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition duration-300 hover:bg-neutral-800"
-          >
-            Request Private Invitation
-          </button>
-        </form>
-      </motion.div>
-    </motion.div>
-  </div>
-</section>
+        </motion.div>
 
+        {/* Atmospheric layers */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/15 to-black/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.18),transparent_50%)]" />
+
+        {/* Content */}
+        <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 34 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.3, ease: "easeOut" }}
+            className="w-full max-w-4xl text-center"
+          >
+            {/* Coming Soon */}
+            <div className="mx-auto mb-6 inline-flex rounded-full border border-white/40 bg-white/20 px-5 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.25)] backdrop-blur-2xl">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white">
+                Coming Soon
+              </p>
+            </div>
+
+            {/* Title */}
+            <h1 className="font-serif text-5xl font-light leading-[0.95] tracking-[0.02em] text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.65)] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+              Continuum
+              <span className="mt-2 block">Wellness</span>
+            </h1>
+
+            {/* Signature */}
+            <p className="mt-6 font-serif text-lg italic text-white/95 drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)] sm:text-xl md:text-2xl">
+              by Carol Ann Beasley
+            </p>
+
+            {/* Invitation Panel */}
+            <motion.div
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, delay: 0.4 }}
+              className="mx-auto mt-10 max-w-xl rounded-[32px] border border-white/40 bg-white/20 p-8 shadow-[0_25px_70px_rgba(0,0,0,0.35)] backdrop-blur-3xl"
+            >
+              <p className="mb-4 text-xs uppercase tracking-[0.28em] text-white/90">
+                Founding Circle Invitation
+              </p>
+
+              <p className="mb-6 text-base font-light leading-relaxed text-white">
+                A limited number of founding members and early partners will be
+                invited to shape the future of this sanctuary from the very
+                beginning.
+              </p>
+
+              {/* Email Form */}
+              <form
+                action="https://formsubmit.co/info@mindrasolutions.com"
+                method="POST"
+                className="flex flex-col gap-4"
+              >
+                <input type="hidden" name="_captcha" value="false" />
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="Continuum Wellness Early Access Request"
+                />
+                <input type="hidden" name="_next" value="https://continuum-wellness.vercel.app/" />
+
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Enter your email"
+                  className="rounded-full bg-white/95 px-6 py-3 text-neutral-800 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-white/70"
+                />
+
+                <button
+                  type="submit"
+                  className="rounded-full bg-neutral-900 px-6 py-3 text-sm uppercase tracking-[0.24em] text-white shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-300 hover:bg-neutral-800"
+                >
+                  Request Early Access
+                </button>
+              </form>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* PHILOSOPHY */}
       <section
@@ -166,7 +173,7 @@ export default function Home() {
                   delay: index * 0.12,
                   ease: "easeOut",
                 }}
-                className="group rounded-[30px] border border-white/65 bg-white/58 p-8 shadow-[0_18px_50px_rgba(25,25,25,0.06)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:bg-white/66 hover:shadow-[0_24px_60px_rgba(25,25,25,0.09)]"
+                className="group rounded-[30px] border border-white/75 bg-white/70 p-8 shadow-[0_18px_50px_rgba(25,25,25,0.06)] backdrop-blur-2xl transition duration-300 hover:-translate-y-1 hover:bg-white/78 hover:shadow-[0_24px_60px_rgba(25,25,25,0.09)]"
               >
                 <div className="mb-6 h-px w-14 bg-neutral-300 transition duration-300 group-hover:w-20" />
                 <h3 className="font-serif text-2xl font-light text-neutral-800">
@@ -187,7 +194,7 @@ export default function Home() {
           {...fadeUp}
           className="mx-auto grid max-w-6xl gap-5 rounded-[34px] border border-white/60 bg-white/70 p-6 shadow-[0_18px_60px_rgba(30,30,30,0.06)] backdrop-blur-xl md:grid-cols-3 md:p-8"
         >
-          <div className="rounded-[24px] border border-white/70 bg-white/82 p-6 backdrop-blur-md shadow-[0_10px_30px_rgba(30,30,30,0.04)]">
+          <div className="rounded-[24px] border border-white/75 bg-white/85 p-6 backdrop-blur-xl shadow-[0_10px_30px_rgba(30,30,30,0.04)]">
             <p className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">
               Atmosphere
             </p>
@@ -196,7 +203,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="rounded-[24px] border border-white/70 bg-white/82 p-6 backdrop-blur-md shadow-[0_10px_30px_rgba(30,30,30,0.04)]">
+          <div className="rounded-[24px] border border-white/75 bg-white/85 p-6 backdrop-blur-xl shadow-[0_10px_30px_rgba(30,30,30,0.04)]">
             <p className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">
               Intention
             </p>
@@ -205,7 +212,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="rounded-[24px] border border-white/70 bg-white/82 p-6 backdrop-blur-md shadow-[0_10px_30px_rgba(30,30,30,0.04)]">
+          <div className="rounded-[24px] border border-white/75 bg-white/85 p-6 backdrop-blur-xl shadow-[0_10px_30px_rgba(30,30,30,0.04)]">
             <p className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">
               Promise
             </p>
@@ -240,9 +247,12 @@ export default function Home() {
           </p>
 
           <div className="mt-10">
-            <button className="rounded-full bg-neutral-900 px-8 py-4 text-sm uppercase tracking-[0.22em] text-white shadow-[0_14px_36px_rgba(0,0,0,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-800">
+            <a
+              href="#"
+              className="inline-flex rounded-full bg-neutral-900 px-8 py-4 text-sm uppercase tracking-[0.22em] text-white shadow-[0_14px_36px_rgba(0,0,0,0.18)] transition duration-300 hover:-translate-y-0.5 hover:bg-neutral-800"
+            >
               Inquire Privately
-            </button>
+            </a>
           </div>
         </motion.div>
       </section>
