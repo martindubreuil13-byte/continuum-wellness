@@ -46,6 +46,75 @@ body {
   animation: goldPulse 3s ease-in-out infinite;
 }
 
+.cw-section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.cw-section-manifesto {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.cw-section-transition {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.cw-container {
+  width: 100%;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.cw-container-centered {
+  width: 100%;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .cw-section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  .cw-section-manifesto {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+  }
+
+  .cw-section-transition {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .cw-container,
+  .cw-container-centered {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cw-container,
+  .cw-container-centered {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
 ::selection {
   background: rgba(201, 169, 110, 0.3);
   color: var(--color-cream);

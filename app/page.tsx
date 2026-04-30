@@ -104,13 +104,77 @@ const eyebrowStyle: React.CSSProperties = {
   letterSpacing: "0.22em",
   textTransform: "uppercase",
   color: gold,
-  marginBottom: "20px",
+  marginBottom: "16px",
   fontFamily: "var(--font-sans)",
   opacity: 0.85,
 };
 
 const bodyStyle: React.CSSProperties = {
   fontSize: "18px",
+  fontWeight: 300,
+  lineHeight: 1.75,
+  color: muted,
+};
+
+const sectionClass = "cw-section";
+const manifestoSectionClass = "cw-section-manifesto";
+const transitionSectionClass = "cw-section-transition";
+const sectionContainerClass = "cw-container";
+const centeredContainerClass = "cw-container-centered";
+
+const headingStyle: React.CSSProperties = {
+  fontSize: "clamp(2.1rem, 3.8vw, 3.35rem)",
+  fontWeight: 300,
+  lineHeight: 1.15,
+  color: cream,
+  maxWidth: "768px",
+};
+
+const manifestoHeadingStyle: React.CSSProperties = {
+  fontSize: "clamp(2.4rem, 4.35vw, 3.9rem)",
+  fontWeight: 300,
+  lineHeight: 1.15,
+  color: cream,
+};
+
+const bodyColumnStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "18px",
+  maxWidth: "704px",
+};
+
+const cardStyle: React.CSSProperties = {
+  backgroundColor: "rgba(245,240,232,0.014)",
+  border: "1px solid rgba(201,169,110,0.07)",
+  borderRadius: "8px",
+  padding: "48px 40px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "16px",
+};
+
+const editorialListStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "16px",
+  listStyle: "none",
+  padding: 0,
+};
+
+const listDotStyle: React.CSSProperties = {
+  display: "block",
+  width: "4px",
+  height: "4px",
+  borderRadius: "50%",
+  backgroundColor: gold,
+  flexShrink: 0,
+  marginTop: "11px",
+  opacity: 0.85,
+};
+
+const listTextStyle: React.CSSProperties = {
+  fontSize: "16px",
   fontWeight: 300,
   lineHeight: 1.75,
   color: muted,
@@ -130,15 +194,16 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await fetch("https://formsubmit.co/ajax/hello@continuumwellness.com", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ email }),
       });
+      if (!response.ok) return;
+      setSubmitted(true);
     } catch {
-      // show success regardless
+      return;
     }
-    setSubmitted(true);
   };
 
   return (
@@ -330,14 +395,15 @@ export default function Home() {
       {/* ── SECTION 2: THE MIRROR ── */}
       <section
         aria-label="The Mirror — does this sound familiar?"
-        style={{ backgroundColor: bg, padding: "96px 0" }}
+        className={manifestoSectionClass}
+        style={{ backgroundColor: bg }}
       >
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={vp}
           variants={stagger}
-          style={{ maxWidth: "720px", margin: "0 auto", padding: "0 24px", textAlign: "center" }}
+          className={centeredContainerClass}
         >
           <motion.p variants={fadeUp} style={eyebrowStyle}>
             Sound Familiar?
@@ -346,13 +412,7 @@ export default function Home() {
           <motion.h2
             variants={fadeUp}
             className="font-serif"
-            style={{
-              fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
-              fontWeight: 300,
-              lineHeight: 1.15,
-              color: cream,
-              marginTop: "16px",
-            }}
+            style={manifestoHeadingStyle}
           >
             You&rsquo;re not struggling.
             <br />
@@ -362,13 +422,14 @@ export default function Home() {
           <motion.div
             variants={fadeUp}
             style={{
-              marginTop: "32px",
+              margin: "32px auto 0",
               display: "flex",
               flexDirection: "column",
-              gap: "16px",
+              gap: "18px",
+              maxWidth: "620px",
             }}
           >
-            <p style={{ ...bodyStyle, maxWidth: "580px", margin: "0 auto" }}>
+            <p style={bodyStyle}>
               You wake up tired despite the sleep.
               <br />
               You succeed — and feel increasingly hollow inside.
@@ -377,7 +438,7 @@ export default function Home() {
               <br />
               And somehow, nothing has actually stuck.
             </p>
-            <p style={{ ...bodyStyle, maxWidth: "580px", margin: "0 auto" }}>
+            <p style={bodyStyle}>
               The problem isn&rsquo;t you. The problem is that everything
               you&rsquo;ve tried was designed for a moment — not a life.
             </p>
@@ -390,14 +451,15 @@ export default function Home() {
       {/* ── SECTION 3: THE REFRAME ── */}
       <section
         aria-label="The Reframe — wellness was meant to be lived"
-        style={{ backgroundColor: surface, padding: "96px 0" }}
+        className={manifestoSectionClass}
+        style={{ backgroundColor: surface }}
       >
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={vp}
           variants={stagger}
-          style={{ maxWidth: "720px", margin: "0 auto", padding: "0 24px", textAlign: "center" }}
+          className={centeredContainerClass}
         >
           <motion.p variants={fadeUp} style={eyebrowStyle}>
             The Real Issue
@@ -406,13 +468,7 @@ export default function Home() {
           <motion.h2
             variants={fadeUp}
             className="font-serif"
-            style={{
-              fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
-              fontWeight: 300,
-              lineHeight: 1.15,
-              color: cream,
-              marginTop: "16px",
-            }}
+            style={manifestoHeadingStyle}
           >
             Wellness was never meant
             <br />
@@ -423,7 +479,7 @@ export default function Home() {
 
           <motion.p
             variants={fadeUp}
-            style={{ ...bodyStyle, maxWidth: "580px", margin: "32px auto 0" }}
+            style={{ ...bodyStyle, maxWidth: "620px", margin: "32px auto 0" }}
           >
             The wellness industry is built on novelty — new modalities, new
             retreats, new frameworks. Each one delivers a peak. None of them hold
@@ -445,9 +501,10 @@ export default function Home() {
       {/* ── SECTION 4: THE INTRODUCTION ── */}
       <section
         aria-label="Introducing Continuum Wellness"
-        style={{ backgroundColor: bg, padding: "96px 0" }}
+        className={sectionClass}
+        style={{ backgroundColor: bg }}
       >
-        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 24px" }}>
+        <div className={sectionContainerClass}>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -461,13 +518,7 @@ export default function Home() {
             <motion.h2
               variants={fadeUp}
               className="font-serif"
-              style={{
-                fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
-                fontWeight: 300,
-                lineHeight: 1.15,
-                color: cream,
-                marginTop: "16px",
-              }}
+              style={headingStyle}
             >
               Not a program. Not a platform.
               <br />
@@ -478,13 +529,7 @@ export default function Home() {
 
             <motion.div
               variants={fadeUp}
-              style={{
-                marginTop: "32px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
-                maxWidth: "600px",
-              }}
+              style={{ ...bodyColumnStyle, marginTop: "28px" }}
             >
               <p style={bodyStyle}>
                 Continuum Wellness is a premium membership built around one idea:
@@ -507,10 +552,10 @@ export default function Home() {
             viewport={vp}
             variants={stagger}
             style={{
-              marginTop: "48px",
+              marginTop: "56px",
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "48px",
+              gap: "56px",
             }}
           >
             <motion.div variants={fadeUp}>
@@ -526,14 +571,14 @@ export default function Home() {
               >
                 What it is
               </h4>
-              <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0 }}>
+              <ul style={editorialListStyle}>
                 {whatItIs.map((item) => (
                   <li
                     key={item}
                     style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}
                   >
-                    <span style={{ display: "block", width: "6px", height: "6px", borderRadius: "50%", backgroundColor: gold, flexShrink: 0, marginTop: "9px" }} />
-                    <span style={{ fontSize: "16px", fontWeight: 300, lineHeight: 1.6, color: muted }}>{item}</span>
+                    <span style={listDotStyle} />
+                    <span style={listTextStyle}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -553,23 +598,19 @@ export default function Home() {
               >
                 What it is not
               </h4>
-              <ul style={{ display: "flex", flexDirection: "column", gap: "12px", listStyle: "none", padding: 0 }}>
+              <ul style={editorialListStyle}>
                 {whatItIsNot.map((item) => (
                   <li key={item} style={{ display: "flex", alignItems: "flex-start", gap: "16px" }}>
                     <span style={{
                       color: gold,
-                      fontSize: "14px",
-                      marginTop: "3px",
+                      fontSize: "12px",
+                      lineHeight: 1,
+                      marginTop: "7px",
                       flexShrink: 0,
-                      opacity: 0.6,
+                      opacity: 0.45,
                       fontFamily: "var(--font-sans)",
                     }}>×</span>
-                    <span style={{
-                      color: muted,
-                      fontSize: "16px",
-                      lineHeight: 1.6,
-                      opacity: 0.75,
-                    }}>{item}</span>
+                    <span style={{ ...listTextStyle, opacity: 0.75 }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -583,9 +624,10 @@ export default function Home() {
       {/* ── SECTION 5: THE EXPERIENCE ── */}
       <section
         aria-label="The weekly experience"
-        style={{ backgroundColor: surface, padding: "96px 0" }}
+        className={sectionClass}
+        style={{ backgroundColor: surface }}
       >
-        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 24px" }}>
+        <div className={sectionContainerClass}>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -598,13 +640,7 @@ export default function Home() {
             <motion.h2
               variants={fadeUp}
               className="font-serif"
-              style={{
-                fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
-                fontWeight: 300,
-                lineHeight: 1.15,
-                color: cream,
-                marginTop: "16px",
-              }}
+              style={headingStyle}
             >
               Two touchpoints.
               <br />
@@ -623,27 +659,20 @@ export default function Home() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "24px",
-              marginTop: "64px",
+              alignItems: "start",
+              gap: "32px",
+              marginTop: "72px",
             }}
           >
             {/* Card 1 — Anchor Session */}
             <motion.div
               variants={fadeUp}
-              style={{
-                backgroundColor: surface,
-                border: "1px solid rgba(201,169,110,0.12)",
-                borderRadius: "20px",
-                padding: "40px 32px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-              }}
+              style={cardStyle}
             >
               <p className="font-serif" style={{ fontSize: "13px", letterSpacing: "0.1em", color: gold, opacity: 0.8 }}>01</p>
               <h3
                 className="font-serif"
-                style={{ fontSize: "1.4rem", color: cream, lineHeight: 1.2 }}
+                style={{ fontSize: "1.55rem", color: cream, lineHeight: 1.2 }}
               >
                 Anchor Session
               </h3>
@@ -651,7 +680,7 @@ export default function Home() {
                 Weekly · 60–75 min · All members
               </p>
               <div style={{ width: "32px", height: "1px", backgroundColor: gold, opacity: 0.3, margin: "4px 0" }} />
-              <p style={{ fontSize: "15px", fontWeight: 300, lineHeight: 1.7, color: muted }}>
+              <p style={{ fontSize: "16px", fontWeight: 300, lineHeight: 1.75, color: muted }}>
                 Your weekly reset. Founder-led teaching, guided practice, and
                 structured reflection. Live-first. Replay available for 7 days —
                 then it&rsquo;s gone. This is a participation system, not a
@@ -662,20 +691,12 @@ export default function Home() {
             {/* Card 2 — Cohort Session */}
             <motion.div
               variants={fadeUp}
-              style={{
-                backgroundColor: surface,
-                border: "1px solid rgba(201,169,110,0.12)",
-                borderRadius: "20px",
-                padding: "40px 32px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-              }}
+              style={cardStyle}
             >
               <p className="font-serif" style={{ fontSize: "13px", letterSpacing: "0.1em", color: gold, opacity: 0.8 }}>02</p>
               <h3
                 className="font-serif"
-                style={{ fontSize: "1.4rem", color: cream, lineHeight: 1.2 }}
+                style={{ fontSize: "1.55rem", color: cream, lineHeight: 1.2 }}
               >
                 Cohort Session
               </h3>
@@ -683,7 +704,7 @@ export default function Home() {
                 Weekly · 60 min · Your group of 8–12
               </p>
               <div style={{ width: "32px", height: "1px", backgroundColor: gold, opacity: 0.3, margin: "4px 0" }} />
-              <p style={{ fontSize: "15px", fontWeight: 300, lineHeight: 1.7, color: muted }}>
+              <p style={{ fontSize: "16px", fontWeight: 300, lineHeight: 1.75, color: muted }}>
                 Your permanent small group. Facilitator-led dialogue where
                 teaching becomes integration. Not recorded. Psychologically safe.
                 Where you stop being an audience and start being known.
@@ -693,20 +714,12 @@ export default function Home() {
             {/* Card 3 — 4 Pillars */}
             <motion.div
               variants={fadeUp}
-              style={{
-                backgroundColor: surface,
-                border: "1px solid rgba(201,169,110,0.12)",
-                borderRadius: "20px",
-                padding: "40px 32px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-              }}
+              style={cardStyle}
             >
               <p className="font-serif" style={{ fontSize: "13px", letterSpacing: "0.1em", color: gold, opacity: 0.8 }}>03</p>
               <h3
                 className="font-serif"
-                style={{ fontSize: "1.4rem", color: cream, lineHeight: 1.2 }}
+                style={{ fontSize: "1.55rem", color: cream, lineHeight: 1.2 }}
               >
                 4 Pillars · 18 Modules
               </h3>
@@ -714,11 +727,11 @@ export default function Home() {
                 Across the year
               </p>
               <div style={{ width: "32px", height: "1px", backgroundColor: gold, opacity: 0.3, margin: "4px 0" }} />
-              <ul style={{ display: "flex", flexDirection: "column", gap: "16px", listStyle: "none", padding: 0 }}>
+              <ul style={editorialListStyle}>
                 {pillars.map((pillar) => (
                   <li key={pillar.title} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                    <p style={{ fontSize: "14px", fontWeight: 600, color: gold }}>{pillar.title}</p>
-                    <p style={{ fontSize: "13px", fontWeight: 300, color: muted }}>{pillar.body}</p>
+                    <p style={{ fontSize: "15px", fontWeight: 600, color: gold }}>{pillar.title}</p>
+                    <p style={{ fontSize: "14px", fontWeight: 300, lineHeight: 1.6, color: muted }}>{pillar.body}</p>
                   </li>
                 ))}
               </ul>
@@ -744,9 +757,10 @@ export default function Home() {
       {/* ── SECTION 6: THE LEGACY ── */}
       <section
         aria-label="The legacy of Carol Ann Beasley"
-        style={{ backgroundColor: bg, padding: "96px 0" }}
+        className={manifestoSectionClass}
+        style={{ backgroundColor: bg }}
       >
-        <div style={{ maxWidth: "720px", margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+        <div className={centeredContainerClass}>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -759,13 +773,7 @@ export default function Home() {
             <motion.h2
               variants={fadeUp}
               className="font-serif"
-              style={{
-                fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
-                fontWeight: 300,
-                lineHeight: 1.15,
-                color: cream,
-                marginTop: "16px",
-              }}
+              style={manifestoHeadingStyle}
             >
               Built in honor of a woman
               <br />
@@ -780,22 +788,28 @@ export default function Home() {
             whileInView="visible"
             viewport={vp}
             variants={stagger}
-            style={{ marginTop: "40px", display: "flex", flexDirection: "column", gap: "24px" }}
+            style={{
+              margin: "40px auto 0",
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
+              maxWidth: "620px",
+            }}
           >
-            <motion.p variants={fadeUp} style={{ ...bodyStyle, maxWidth: "580px", margin: "0 auto" }}>
+            <motion.p variants={fadeUp} style={bodyStyle}>
               Carol Ann Beasley spent her life studying what it means to truly
               thrive — not to optimize, not to perform, but to be fully alive in
               one&rsquo;s own skin, inside a community that holds you.
             </motion.p>
-            <motion.p variants={fadeUp} style={{ ...bodyStyle, maxWidth: "580px", margin: "0 auto" }}>
+            <motion.p variants={fadeUp} style={bodyStyle}>
               Her vision was simple and radical: that wellbeing is not something
               you pursue. It&rsquo;s something you build — through structure,
               through rhythm, through real human connection.
             </motion.p>
-            <motion.p variants={fadeUp} style={{ ...bodyStyle, color: cream, maxWidth: "580px", margin: "0 auto" }}>
+            <motion.p variants={fadeUp} style={{ ...bodyStyle, color: cream }}>
               She passed before she could build it herself.
             </motion.p>
-            <motion.p variants={fadeUp} style={{ ...bodyStyle, maxWidth: "580px", margin: "0 auto" }}>
+            <motion.p variants={fadeUp} style={bodyStyle}>
               Dr. Virgil Beasley — her husband, a psychologist, and a cancer
               survivor — made a decision: her vision would not remain a vision.
               Having faced his own mortality, Virgil understands something about
@@ -822,9 +836,10 @@ export default function Home() {
       {/* ── SECTION 7: WHO THIS IS FOR ── */}
       <section
         aria-label="Who Continuum Wellness is for"
-        style={{ backgroundColor: surface, padding: "96px 0" }}
+        className={sectionClass}
+        style={{ backgroundColor: surface }}
       >
-        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 24px" }}>
+        <div className={sectionContainerClass}>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -837,20 +852,14 @@ export default function Home() {
             <motion.h2
               variants={fadeUp}
               className="font-serif"
-              style={{
-                fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
-                fontWeight: 300,
-                lineHeight: 1.15,
-                color: cream,
-                marginTop: "16px",
-              }}
+              style={headingStyle}
             >
               For the person who has almost everything — and knows something
               essential is missing.
             </motion.h2>
             <motion.div
               variants={fadeUp}
-              style={{ marginTop: "32px", display: "flex", flexDirection: "column", gap: "16px" }}
+              style={{ ...bodyColumnStyle, marginTop: "28px" }}
             >
               <p style={bodyStyle}>
                 You are established. Capable. Respected. You have built things,
@@ -874,10 +883,10 @@ export default function Home() {
             viewport={vp}
             variants={stagger}
             style={{
-              marginTop: "40px",
+              marginTop: "56px",
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "48px",
+              gap: "56px",
             }}
           >
             <motion.div variants={fadeUp}>
@@ -887,14 +896,14 @@ export default function Home() {
               >
                 You&rsquo;ll feel at home here if:
               </h3>
-              <ul style={{ display: "flex", flexDirection: "column", gap: "16px", listStyle: "none", padding: 0 }}>
+              <ul style={editorialListStyle}>
                 {forYouIf.map((item) => (
                   <li
                     key={item}
-                    style={{ display: "flex", alignItems: "flex-start", gap: "12px", fontSize: "16px", fontWeight: 300, lineHeight: 1.6 }}
+                    style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}
                   >
-                    <span style={{ color: gold, fontWeight: 600, flexShrink: 0 }}>✓</span>
-                    <span style={{ color: cream }}>{item}</span>
+                    <span style={listDotStyle} />
+                    <span style={{ ...listTextStyle, color: cream }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -907,14 +916,14 @@ export default function Home() {
               >
                 This is not for you if:
               </h3>
-              <ul style={{ display: "flex", flexDirection: "column", gap: "16px", listStyle: "none", padding: 0 }}>
+              <ul style={editorialListStyle}>
                 {notForYouIf.map((item) => (
                   <li
                     key={item}
-                    style={{ display: "flex", alignItems: "flex-start", gap: "12px", fontSize: "16px", fontWeight: 300, lineHeight: 1.6 }}
+                    style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}
                   >
-                    <span style={{ color: muted, opacity: 0.5, flexShrink: 0 }}>—</span>
-                    <span style={{ color: muted, opacity: 0.7 }}>{item}</span>
+                    <span style={{ ...listDotStyle, backgroundColor: muted, opacity: 0.35 }} />
+                    <span style={{ ...listTextStyle, opacity: 0.7 }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -929,9 +938,10 @@ export default function Home() {
       <section
         id="founding-form"
         aria-label="Founding Circle application"
-        style={{ backgroundColor: bg, padding: "96px 0" }}
+        className={sectionClass}
+        style={{ backgroundColor: bg }}
       >
-        <div style={{ maxWidth: "720px", margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+        <div className={sectionContainerClass}>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -945,13 +955,7 @@ export default function Home() {
             <motion.h2
               variants={fadeUp}
               className="font-serif"
-              style={{
-                fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
-                fontWeight: 300,
-                lineHeight: 1.15,
-                color: cream,
-                marginTop: "16px",
-              }}
+              style={headingStyle}
             >
               Be among the first
               <br />
@@ -962,7 +966,7 @@ export default function Home() {
 
             <motion.p
               variants={fadeUp}
-              style={{ ...bodyStyle, maxWidth: "580px", margin: "32px auto 0" }}
+              style={{ ...bodyStyle, maxWidth: "680px", marginTop: "28px" }}
             >
               Continuum Wellness launches in 2026. Before we open publicly, we
               are inviting 100 founding members — the people who will set the
@@ -970,7 +974,7 @@ export default function Home() {
               day one.
             </motion.p>
 
-            <motion.div variants={fadeUp} style={{ display: "flex", justifyContent: "center" }}>
+            <motion.div variants={fadeUp}>
               <ul style={{
                 listStyle: "none",
                 padding: 0,
@@ -979,21 +983,19 @@ export default function Home() {
                 flexDirection: "column",
                 gap: "16px",
                 textAlign: "left",
-                maxWidth: "420px",
+                maxWidth: "520px",
               }}>
                 {benefits.map((benefit) => (
                   <li
                     key={benefit}
                     style={{
                       display: "flex",
-                      alignItems: "center",
-                      gap: "12px",
-                      fontSize: "16px",
-                      fontWeight: 300,
+                      alignItems: "flex-start",
+                      gap: "14px",
                     }}
                   >
-                    <span style={{ display: "block", width: "6px", height: "6px", borderRadius: "50%", backgroundColor: gold, flexShrink: 0 }} />
-                    <span style={{ color: cream }}>{benefit}</span>
+                    <span style={listDotStyle} />
+                    <span style={{ ...listTextStyle, color: cream }}>{benefit}</span>
                   </li>
                 ))}
               </ul>
@@ -1005,9 +1007,10 @@ export default function Home() {
                 <div
                   style={{
                     marginTop: "48px",
-                    border: "1px solid rgba(201,169,110,0.15)",
-                    borderRadius: "16px",
-                    padding: "40px 32px",
+                    border: "1px solid rgba(201,169,110,0.1)",
+                    borderRadius: "8px",
+                    padding: "44px 36px",
+                    maxWidth: "520px",
                   }}
                 >
                   <p
@@ -1023,8 +1026,8 @@ export default function Home() {
               ) : (
                 <div
                   style={{
-                    maxWidth: "420px",
-                    margin: "48px auto 0",
+                    maxWidth: "520px",
+                    margin: "48px 0 0",
                     display: "flex",
                     flexDirection: "column",
                     gap: "16px",
@@ -1049,7 +1052,7 @@ export default function Home() {
                         padding: "16px 24px",
                         color: cream,
                         fontSize: "14px",
-                        textAlign: "center",
+                        textAlign: "left",
                         outline: "none",
                         transition: "border-color 0.3s ease",
                       }}
@@ -1094,12 +1097,12 @@ export default function Home() {
       {/* ── SECTION 9: THE CLOSE ── */}
       <section
         aria-label="Closing"
+        className={manifestoSectionClass}
         style={{
-          padding: "96px 0",
           background: `linear-gradient(to bottom, ${bg}, rgba(201,169,110,0.05))`,
         }}
       >
-        <div style={{ maxWidth: "720px", margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+        <div className={centeredContainerClass}>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1109,12 +1112,7 @@ export default function Home() {
             <motion.h2
               variants={fadeUp}
               className="font-serif"
-              style={{
-                fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
-                fontWeight: 300,
-                lineHeight: 1.15,
-                color: cream,
-              }}
+              style={manifestoHeadingStyle}
             >
               The rhythm you&rsquo;ve been
               <br />
@@ -1170,7 +1168,8 @@ export default function Home() {
       {/* ── FOOTER ── */}
       <footer
         aria-label="Footer"
-        style={{ backgroundColor: "#0a0806", padding: "48px 24px", textAlign: "center" }}
+        className={transitionSectionClass}
+        style={{ backgroundColor: "#0a0806", textAlign: "center" }}
       >
         <p className="font-serif" style={{ fontSize: "20px", color: cream }}>
           Continuum Wellness
