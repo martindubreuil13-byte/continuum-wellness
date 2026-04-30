@@ -25,6 +25,9 @@ const vp = { once: true, amount: 0.12, margin: "-60px 0px -60px 0px" };
 
 function scrollToForm() {
   document.getElementById("founding-form")?.scrollIntoView({ behavior: "smooth" });
+  window.setTimeout(() => {
+    document.getElementById("founding-email")?.focus({ preventScroll: true });
+  }, 800);
 }
 
 function Divider() {
@@ -184,6 +187,8 @@ export default function Home() {
   const [navVisible, setNavVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
 
   useEffect(() => {
     const onScroll = () => setNavVisible(window.scrollY > 80);
@@ -193,16 +198,25 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitting(true);
+    setFormError("");
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ email }),
       });
-      if (!response.ok) return;
+      if (!response.ok) {
+        setFormError("Something interrupted the request. Please try again.");
+        return;
+      }
+      setEmail("");
       setSubmitted(true);
     } catch {
+      setFormError("Something interrupted the request. Please try again.");
       return;
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -354,7 +368,7 @@ export default function Home() {
           <motion.button
             variants={fadeUp}
             className="btn-pulse"
-            onClick={() => document.getElementById("founding-form")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={scrollToForm}
             style={{
               backgroundColor: "#c9a96e",
               color: "#0f0d0b",
@@ -1022,6 +1036,9 @@ export default function Home() {
                   <p style={{ fontSize: "16px", fontWeight: 300, color: muted, marginTop: "8px" }}>
                     We&rsquo;ll be in touch personally.
                   </p>
+                  <p style={{ fontSize: "14px", fontWeight: 300, color: muted, marginTop: "18px", opacity: 0.75 }}>
+                    Your request has been received.
+                  </p>
                 </div>
               ) : (
                 <div
@@ -1038,10 +1055,15 @@ export default function Home() {
                     style={{ display: "flex", flexDirection: "column", gap: "16px" }}
                   >
                     <input
+                      id="founding-email"
                       type="email"
                       required
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={submitting}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (formError) setFormError("");
+                      }}
                       placeholder="Your email address"
                       className="placeholder:text-[#b8ad9e]"
                       style={{
@@ -1055,6 +1077,7 @@ export default function Home() {
                         textAlign: "left",
                         outline: "none",
                         transition: "border-color 0.3s ease",
+                        opacity: submitting ? 0.7 : 1,
                       }}
                       onFocus={(e) => { e.currentTarget.style.borderColor = gold; }}
                       onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)"; }}
@@ -1062,6 +1085,7 @@ export default function Home() {
                     <button
                       type="submit"
                       className="btn-pulse"
+                      disabled={submitting}
                       style={{
                         width: "100%",
                         backgroundColor: gold,
@@ -1072,16 +1096,28 @@ export default function Home() {
                         padding: "16px 24px",
                         fontSize: "12px",
                         textTransform: "uppercase",
-                        cursor: "pointer",
+                        cursor: submitting ? "default" : "pointer",
                         border: "none",
-                        transition: "background-color 0.3s ease",
+                        opacity: submitting ? 0.72 : 1,
+                        transition: "background-color 0.3s ease, opacity 0.3s ease",
                       }}
-                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = goldLight; }}
+                      onMouseEnter={(e) => {
+                        if (!submitting) e.currentTarget.style.backgroundColor = goldLight;
+                      }}
                       onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = gold; }}
                     >
-                      Request Your Founding Membership
+                      {submitting ? "Submitting..." : "Request Your Founding Membership"}
                     </button>
                   </form>
+                  {formError && (
+                    <p
+                      role="status"
+                      aria-live="polite"
+                      style={{ fontSize: "13px", fontWeight: 300, lineHeight: 1.6, color: gold, opacity: 0.78 }}
+                    >
+                      {formError}
+                    </p>
+                  )}
                   <p style={{ fontSize: "12px", color: muted }}>
                     We&rsquo;ll be in touch personally. No spam — ever.
                   </p>
