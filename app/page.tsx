@@ -201,19 +201,19 @@ export default function Home() {
     setSubmitting(true);
     setFormError("");
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ email }),
       });
       if (!response.ok) {
-        setFormError("Something interrupted the request. Please try again.");
+        setFormError("Something went wrong.");
         return;
       }
       setEmail("");
       setSubmitted(true);
     } catch {
-      setFormError("Something interrupted the request. Please try again.");
+      setFormError("Something went wrong.");
       return;
     } finally {
       setSubmitting(false);
@@ -1031,7 +1031,7 @@ export default function Home() {
                     className="font-serif"
                     style={{ fontSize: "26px", fontWeight: 300, color: cream }}
                   >
-                    You&rsquo;re on the list.
+                    You&rsquo;ve been added to the Founding Circle. We&rsquo;ll share selected updates and early invitations as the journey unfolds.
                   </p>
                   <p style={{ fontSize: "16px", fontWeight: 300, color: muted, marginTop: "8px" }}>
                     We&rsquo;ll be in touch personally.
@@ -1106,7 +1106,7 @@ export default function Home() {
                       }}
                       onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = gold; }}
                     >
-                      {submitting ? "Submitting..." : "Request Your Founding Membership"}
+                      {submitting ? "Sending..." : "Request Your Founding Membership"}
                     </button>
                   </form>
                   {formError && (
