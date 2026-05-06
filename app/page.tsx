@@ -232,53 +232,48 @@ export default function Home() {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: "0 24px",
           height: "64px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
           backgroundColor: navVisible ? "rgba(15,13,11,0.90)" : "transparent",
           backdropFilter: navVisible ? "blur(12px)" : "none",
-          opacity: navVisible ? 1 : 0,
-          transition: "all 0.4s ease",
-          pointerEvents: navVisible ? "auto" : "none",
+          borderBottom: navVisible ? "1px solid rgba(245,240,232,0.07)" : "1px solid transparent",
+          transition: "background-color 0.45s ease, backdrop-filter 0.45s ease, border-color 0.45s ease",
         }}
       >
-        <span
-          className="font-serif"
-          style={{ fontSize: "14px", letterSpacing: "0.05em", color: cream }}
-        >
-          Continuum Wellness
-        </span>
-        <button
-          onClick={scrollToForm}
-          style={{
-            background: "transparent",
-            border: `1px solid ${gold}`,
-            borderRadius: "9999px",
-            padding: "8px 20px",
-            fontSize: "11px",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: cream,
-            cursor: "pointer",
-            transition: "all 0.3s ease",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = gold;
-            e.currentTarget.style.color = bg;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "transparent";
-            e.currentTarget.style.color = cream;
-          }}
-        >
-          Join the Founding Circle
-        </button>
+        <div className="cw-nav-inner">
+          <button
+            onClick={scrollToForm}
+            style={{
+              background: "transparent",
+              border: `1px solid ${gold}`,
+              borderRadius: "9999px",
+              padding: "8px 20px",
+              fontSize: "11px",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: cream,
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = gold;
+              e.currentTarget.style.color = bg;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.color = cream;
+            }}
+          >
+            Join the Founding Circle
+          </button>
+        </div>
       </nav>
 
       {/* ── SECTION 1: HERO ── */}
       <section
+        id="top"
         aria-label="Hero"
         style={{
           position: "relative",
@@ -304,6 +299,15 @@ export default function Home() {
           background: "linear-gradient(to bottom, rgba(10,8,6,0.72) 0%, rgba(10,8,6,0.82) 60%, rgba(10,8,6,0.95) 100%)",
         }} />
 
+        <Image
+          src="/logos/cab-logo-white.png"
+          alt=""
+          aria-hidden="true"
+          width={4096}
+          height={3354}
+          className="cw-hero-watermark"
+        />
+
         <motion.div
           initial="hidden"
           animate="visible"
@@ -320,6 +324,15 @@ export default function Home() {
           }}
         >
           <motion.div variants={fadeUp}>
+            <Image
+              src="/logos/cab-logo-white.png"
+              alt=""
+              aria-hidden="true"
+              width={4096}
+              height={3354}
+              className="cw-hero-logo"
+              priority
+            />
             <p style={{
               fontFamily: "var(--font-serif)",
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
@@ -1207,6 +1220,15 @@ export default function Home() {
         className={transitionSectionClass}
         style={{ backgroundColor: "#0a0806", textAlign: "center" }}
       >
+        <div className="cw-footer-logo-wrap">
+          <Image
+            src="/logos/cab-logo-white.png"
+            alt="CAB Wellness"
+            width={4096}
+            height={3354}
+            className="cw-footer-logo"
+          />
+        </div>
         <p className="font-serif" style={{ fontSize: "20px", color: cream }}>
           Continuum Wellness
         </p>
