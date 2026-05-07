@@ -346,7 +346,7 @@ export default function Home() {
             <p style={{
               fontFamily: "var(--font-serif)",
               fontSize: "clamp(1rem, 2.5vw, 1.4rem)",
-              color: "#c9a96e",
+              color: "rgba(245, 240, 232, 0.78)",
               fontStyle: "italic",
               letterSpacing: "0.06em",
               marginBottom: "32px",

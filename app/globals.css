@@ -99,18 +99,18 @@ body {
   right: -13%;
   width: clamp(26rem, 48vw, 48rem);
   height: auto;
-  opacity: 0.03;
+  opacity: 0.022;
   filter: blur(0.6px);
   pointer-events: none;
   user-select: none;
 }
 
 .cw-hero-logo {
-  width: 52px;
+  width: 104px;
   height: auto;
   object-fit: contain;
   display: block;
-  margin: 0 auto 24px;
+  margin: 0 auto 34px;
   opacity: 0.88;
 }
 
@@ -162,8 +162,8 @@ body {
   }
 
   .cw-hero-logo {
-    width: 66px;
-    margin-bottom: 28px;
+    width: 132px;
+    margin-bottom: 42px;
   }
 }
 
@@ -177,6 +177,11 @@ body {
   .cw-nav-inner {
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+
+  .cw-hero-logo {
+    width: 164px;
+    margin-bottom: 46px;
   }
 }
 
@@ -195,12 +200,12 @@ body {
     top: 14%;
     right: -48%;
     width: 32rem;
-    opacity: 0.025;
+    opacity: 0.018;
   }
 
   .cw-hero-logo {
-    width: 48px;
-    margin-bottom: 22px;
+    width: 104px;
+    margin-bottom: 32px;
   }
 }
 
